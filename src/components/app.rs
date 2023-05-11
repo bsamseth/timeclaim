@@ -11,7 +11,7 @@ pub fn App(cx: Scope) -> impl IntoView {
         <nav> </nav>
         <main>
           <Routes>
-            <Route path="/validate/:claim" view=|cx| view! { cx, <Validate/> }/>
+            <Route path="timeclaim/validate/:claim" view=|cx| view! { cx, <Validate/> }/>
             <Route path="/*any" view=|cx| view! { cx, <NewClaim/> }/>
           </Routes>
         </main>

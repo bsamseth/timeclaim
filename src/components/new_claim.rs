@@ -1,5 +1,4 @@
 use leptos::*;
-use leptos_router::*;
 
 use crate::claim::TimeClaim;
 use crate::error::TimeClaimError;
@@ -12,12 +11,14 @@ pub fn NewClaim(cx: Scope) -> impl IntoView {
         || (),
         |_| async move {
             let claim = TimeClaim::new().await?;
-            let origin = web_sys::window()
+            let href = web_sys::window()
                 .expect("window to be available")
                 .location()
-                .origin()
+                .href()
                 .expect("origin to be available");
-            let url = format!("{}/validate/{}", origin, claim.as_b64());
+            log!("origin: {}", href);
+            let url = format!("{}/validate/{}", href, claim.as_b64());
+            log!("url: {}", url);
             let qr = qr::make_qr(&url)?;
             Ok::<_, TimeClaimError>((url, qr))
         },
@@ -28,7 +29,7 @@ pub fn NewClaim(cx: Scope) -> impl IntoView {
         Some(Ok((url, claim_qr))) => view! {
             cx,
             <div inner_html=claim_qr/>
-            <A href={url}>"Click here to see what scanning the QR code looks like."</A>
+            <a href={url}>"Click here to see what scanning the QR code looks like."</a>
         }
         .into_view(cx),
     };

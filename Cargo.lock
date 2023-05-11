@@ -2017,7 +2017,6 @@ dependencies = [
  "serde",
  "serde_json",
  "thiserror",
- "web-sys",
 ]
 
 [[package]]

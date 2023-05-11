@@ -15,4 +15,3 @@ reqwasm = "0.5.0"
 serde = { version = "1.0.160", features = ["serde_derive", "derive"] }
 serde_json = "1.0.96"
 thiserror = "1.0.40"
-web-sys = { version = "0.3.61", features = ["Window", "Location"] }
